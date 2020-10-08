@@ -1,0 +1,1 @@
+gcc -Wall -o xcrypt xcrypt.c
