@@ -10,19 +10,9 @@ void * crypt(void * data)
     in_stream=fopen(in,"rb");
     if(len(out)==0) out_stream=fopen(out,"r+b"); else out_stream=fopen(out,"wb");
 
-    if(len(in)>0 && len(out)>0)
+    if(in_stream!=NULL&&out_stream!=NULL)
     {
         
-        
-
-        if(in_stream!=NULL)
-        {
-            printf("no in error");
-        }
-        if(out_stream!=NULL)
-        {
-            printf("no out error");
-        }
     }
     //printf("i/p: %s %d\no/p: %s %d\n",args->in,len(args->in),args->out,len(args->out));
     return(NULL);
