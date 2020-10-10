@@ -5,6 +5,7 @@ extern char Key[16];
 extern size_t FILESIZE;
 extern size_t BUFF;
 extern int stop;
+extern char * FILENAME;
 size_t len(char *in){size_t m=0;while(1){if(in[m]!='\0')m++;else break;}return(m);}
 size_t filelen(char * filename){
     	FILE * OriginalFile=fopen(filename,"rb");
@@ -16,10 +17,11 @@ size_t filelen(char * filename){
 void * crypt(void * data)
 {
     crypt_args * args=(crypt_args *)data;
-    BUFF=0;
-    stop=0;
     char * in=args->in;
     char * out=args->out;
+    FILENAME=in;
+    BUFF=0;
+    stop=0;
     FILESIZE=filelen(in);
 
     FILE * in_stream, * out_stream;
@@ -49,9 +51,10 @@ void * crypt(void * data)
 }
 void * stat()
 {
-    //printf("\n");
+    printf("%s\n",FILENAME);
     while(!stop){
-    printf("\r%3.0f",(float)(BUFF*100)/FILESIZE);
+    printf("\r%3.0f ",(float)(BUFF*100)/FILESIZE);
+    fflush(stdout);
     //printf("\r");
     }
     printf("\n");

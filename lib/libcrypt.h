@@ -6,6 +6,7 @@ extern char Key[16];
 extern size_t FILESIZE;
 extern size_t BUFF;
 extern int stop;
+extern char * FILENAME;
 typedef struct crypt_args{
     char * in;
     char * out;

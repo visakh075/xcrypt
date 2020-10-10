@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include "lib/libcrypt.h"
 #include "lib/keyman.h"
-char Key[16];
+char Key[16];char * FILENAME;
 size_t FILESIZE=0,BUFF=0;
 int stop=0;
 int main(int argc,char ** argv)

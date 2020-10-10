@@ -1,1 +1,1 @@
-gcc -o libcrypt.o -c libcrypt.c
+clang -o libcrypt.o -c libcrypt.c
