@@ -14,26 +14,18 @@ int main(int argc,char ** argv)
     int conf[]={0,0,-1};
     int isdef[]={0,1,0};
     map_init(&map,list,ex_param,conf,isdef,1,argc,argv);
-    //showmap(map);
-    char * in;//="test/Lab.zip";
-    char * out;//="test/m.zip";
+    char * in;
+    char * out;
     if(!error(map))
     {
-        if(safe('n',map)==1)
-        {
-            out=branch('n',map)->param[0];
-            printf("new %s",out);
-        }
-        else if(safe('r',map)==1)
-        {
-            out=branch('r',map)->param[0];
-            printf("replace %s",out);
-        }
-        if(safe('k',map))
-        {
-            printf("key %s",branch('k',map)->param[0]);
-        }
+        if(safe('n',map)){out=branch('n',map)->param[0];}
+        else{out=branch('.',map)->param[0];}
+        
+        if(safe('k',map)){GetKey(branch('k',map)->param[0]);}
+        else{GetKey("KEY");}
+
         in=branch('.',map)->param[0];
+        encrypt(in,out);
     }
     else
     {
