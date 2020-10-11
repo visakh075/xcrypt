@@ -41,7 +41,7 @@ void showmap(arg_map map){
     printf("Confl\t");for(int m=0;m<argsize(map.opt);m++){printf("%d\t",map.conf[m]);}printf("\n");
     printf("Error\t");for(int m=0;m<argsize(map.opt);m++){printf("%d\t",map.err[m]);}printf("\n");
     printf("is_def\t");for(int m=0;m<argsize(map.opt);m++){printf("%d\t",map.is_def[m]);}printf("\n");
-
+    printf("safe\t");for(int m=0;m<argsize(map.opt);m++){printf("%d\t",safe(map.opt[m],map));}printf("\n");
     }  
 size_t argsize(char * filename){
     size_t size=0;
@@ -67,13 +67,13 @@ void explore_map(arg_map * map){
                 {branch_count++;}
             }}}
 
-    map->n_branch=(branch_count+1);
+    map->n_branch=(branch_count+1); // add one for main branch
     map->branch=(arg_group *)malloc(sizeof(arg_group)*map->n_branch);
     //
     //branch defintion
     int bi=0;
     for(int i=0;i<map->argc;i++){
-        if((map->flag[i])>0 && map->ex_param[map->inv_pos[i]]) //branch
+        if((map->flag[i])>0 && map->ex_param[map->inv_pos[i]]) // opt and parameters >0
         {
             map->branch[bi].opt=map->opt[map->inv_pos[i]];
             map->branch[bi].pos=i;
@@ -94,7 +94,11 @@ void explore_map(arg_map * map){
                 
             }bi++;
         }
+        else if((map->flag[i])>0)
+        {
+            
         }
+    }
 
     //
     //main branch
@@ -143,17 +147,36 @@ void wars(arg_map map){
 int safe(char c,arg_map map)
 {
     int safe=0;
+    // non conflict
+    // 
     for(int m=0;m<argsize(map.opt);m++)
     {
         if(map.opt[m]==c)
         {
-            if(map.pos[m]>0 || map.is_def[m]>0)
+            int is_conf=0;// searching for other this opt is default
+            for(int n=0;n<argsize(map.opt);n++)
             {
-                if(map.err[m]==0 && map.ic==map.d_param)
+                if(map.conf[m]==map.conf[n] && map.conf[n]>-1)// same conf
                 {
-                    safe=1;break;
+                    if(map.pos[n]>0) // same conf number and the other elemnt exist
+                    {
+                        is_conf=1;break;
+                    }
                 }
+
             }
+
+            if((map.err[m]==0 && map.pos[m]>0) || (map.is_def[m]==1 && !is_conf))
+            {
+               safe=1;break;
+            }
+            //if(map.pos[m]>0 || map.is_def[m]>0)
+            //{
+            //    if(map.err[m]==0 && map.ic==map.d_param)
+            //    {
+            //        safe=1;break;
+            //    }
+            //}
         }
     }
     return(safe);
