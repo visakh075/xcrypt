@@ -16,22 +16,27 @@ int main(int argc,char ** argv)
     map_init(&map,list,ex_param,conf,isdef,1,argc,argv);
     char * in;
     char * out;
+    char * key;
     if(!error(map))
     {
-        if(safe('n',map)){out=branch('n',map)->param[0];}
-        else{out=branch('.',map)->param[0];}
-        
-        if(safe('k',map)){GetKey(branch('k',map)->param[0]);}
-        else{GetKey("KEY");}
-
+        printf("no error");
         in=branch('.',map)->param[0];
-        encrypt(in,out);
+        //if(safe('n',map)){out=branch('n',map)->param[0];}
+        //else{out=branch('.',map)->param[0];}
+        
+        //if(safe('k',map)){GetKey(branch('k',map)->param[0]);}
+        //else{GetKey("KEY");}
+
+        //in=branch('.',map)->param[0];
+        //encrypt(in,out);
     }
     else
     {
         printf("error\n");
     }
-    
+    printf("in %s\n",in);
+    printf("out %s\n",out);
+    printf("key %s\n",key);
     //char * in="test/Lab.zip";
     //char * out="test/m.zip";
     
