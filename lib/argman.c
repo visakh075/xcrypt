@@ -67,7 +67,7 @@ void explore_map(arg_map * map){
                 {branch_count++;}
             }}}
 
-    map->n_branch=(branch_count+1); // add one for main branch
+    map->n_branch=(branch_count+1);
     map->branch=(arg_group *)malloc(sizeof(arg_group)*map->n_branch);
     //
     //branch defintion

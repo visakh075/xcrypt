@@ -34,4 +34,3 @@ int safe(char c,arg_map map);
 int error(arg_map map);
 arg_group * branch(char c,arg_map map);
 #endif
-
