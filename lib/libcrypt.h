@@ -11,9 +11,9 @@ typedef struct crypt_args{
     char * in;
     char * out;
 }crypt_args;
-void * crypt(void * crypt_args);
+void * thread_crypt(void * crypt_args);
 void * stat();
 size_t filelen(char * file);
 size_t len(char * in);
-void encrypt(char * in,char * out);
+void xcrypt(char * in,char * out);
 #endif

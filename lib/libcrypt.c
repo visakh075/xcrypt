@@ -1,6 +1,7 @@
 #include "libcrypt.h"
 #include <stdio.h>
-#include<pthread.h>
+#include <pthread.h>
+#include <unistd.h>
 extern char Key[16];
 extern size_t FILESIZE;
 extern size_t BUFF;
@@ -15,7 +16,7 @@ size_t filelen(char * filename){
 		fclose(OriginalFile);
         return FILESIZE;
 }
-void * crypt(void * data)
+void * thread_crypt(void * data)
 {
     crypt_args * args=(crypt_args *)data;
     char * in=args->in;
@@ -51,23 +52,25 @@ void * crypt(void * data)
 }
 void * stat()
 {
-    printf("%s\n",FILENAME);
+    
     while(!stop){
-    printf("\r%3.0f ",(float)(BUFF*100)/FILESIZE);
-    fflush(stdout);
-    //printf("\r");
+        usleep(50000);
+        printf("\r");
+        printf("%s \t",FILENAME);
+        printf("%3.0f ",(float)(BUFF*100)/FILESIZE);
+        fflush(stdout);
     }
     printf("\n");
     pthread_exit(NULL);
 }
-void encrypt(char * in,char * out)
+void xcrypt(char * in,char * out)
 {
     crypt_args args;
     args.in=in;
     args.out=out;
     pthread_t machine;
     pthread_t status;
-    pthread_create(&machine,NULL,crypt,(void *)&args);
+    pthread_create(&machine,NULL,thread_crypt,(void *)&args);
     pthread_create(&status,NULL,stat,NULL);
     pthread_join(machine,NULL);
     pthread_join(status,NULL);
