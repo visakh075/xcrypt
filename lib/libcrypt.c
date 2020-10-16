@@ -6,7 +6,7 @@ extern size_t FILESIZE;
 extern size_t BUFF;
 extern int stop;
 extern char * FILENAME;
-size_t len(char *in){size_t m=0;while(1){if(in[m]!='\0')m++;else break;}return(m);}
+size_t len(char *in){size_t m=0;if(in==NULL){return(0);} while(1){if(in[m]!='\0')m++;else break;}return(m);}
 size_t filelen(char * filename){
     	FILE * OriginalFile=fopen(filename,"rb");
         if(OriginalFile==NULL){return(0);}
@@ -23,19 +23,17 @@ void * crypt(void * data)
     FILENAME=in;
     BUFF=1;
     stop=0;
-    printf("len of out char %d",len(out));
+    
     FILESIZE=filelen(in);
     if(FILESIZE==0){printf("error : non-vaid file");}
     else{
     FILE * in_stream, * out_stream;
     in_stream=fopen(in,"rb");
-    printf("len of out char %d",len(out));
     if(len(out)==0){out_stream=fopen(in,"r+b");} else{out_stream=fopen(out,"wb");}
     if(in_stream!=NULL&&out_stream!=NULL)
     {
         char Sym,SymE;
         int i=0;
-        //FILESIZE=filelen(in);
         while(!feof(in_stream))
         {
             Sym=fgetc(in_stream);
@@ -43,14 +41,11 @@ void * crypt(void * data)
             i++;
             fputc(SymE,out_stream);
             BUFF++;
-            //fwrite("%c",sizeof(char),1,out_stream);
         }
         fclose(in_stream);fclose(out_stream);
-        //BUFF=0;
         stop=1;
     }
     }
-    //printf("i/p: %s %d\no/p: %s %d\n",args->in,len(args->in),args->out,len(args->out));
     pthread_exit(NULL);
     return(NULL);
 }
@@ -70,7 +65,6 @@ void encrypt(char * in,char * out)
     crypt_args args;
     args.in=in;
     args.out=out;
-    printf("echo from encrypt input:%s \t output:%s \n",args.in,args.out);
     pthread_t machine;
     pthread_t status;
     pthread_create(&machine,NULL,crypt,(void *)&args);
