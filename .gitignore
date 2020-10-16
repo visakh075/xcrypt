@@ -51,5 +51,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 test/
+lib/hexcomp
 .DS_Store
 lib/hexcomp
+xcrypt
