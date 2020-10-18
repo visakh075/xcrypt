@@ -5,3 +5,5 @@ lib/hexcomp
 .DS_Store
 lib/hexcomp
 xcrypt
+net_build_*
+list.net_build
