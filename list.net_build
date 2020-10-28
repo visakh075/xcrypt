@@ -1,5 +1,5 @@
 lib/argman.o
 lib/hexcomp
 lib/keyman.o
-lib/libcypt.o
+lib/libcrypt.o
 xcrypt
