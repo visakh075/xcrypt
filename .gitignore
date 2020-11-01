@@ -6,3 +6,5 @@ lib/hexcomp
 lib/hexcomp
 xcrypt
 net_build_*
+cross/
+Makefile

@@ -56,7 +56,7 @@ void * stat()
     while(!stop){
         usleep(50000);
         printf("\r");
-        printf("%s \t",FILENAME);
+        printf("%-15.15s \t",FILENAME);
         printf("%3.0f ",(float)(BUFF*100)/FILESIZE);
         fflush(stdout);
     }
