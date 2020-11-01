@@ -25,7 +25,6 @@ int main(int argc,char ** argv)
 
         if(safe('k',map)){GetKey(branch('k',map)->param[0]);key=branch('k',map)->param[0];}
         else{GetKey("KEY");}
-
         xcrypt(in,out);
     }
     else
