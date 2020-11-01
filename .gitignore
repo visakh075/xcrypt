@@ -6,5 +6,9 @@ lib/hexcomp
 lib/hexcomp
 xcrypt
 net_build_*
+<<<<<<< HEAD
 cross/
 Makefile
+=======
+list.net_build
+>>>>>>> 60cda9925af9ddd0f23d43b3c58622128d76a1c1
