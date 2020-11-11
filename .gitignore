@@ -8,4 +8,3 @@ xcrypt
 net_build_*
 list.net_build
 cross
-Makefile
